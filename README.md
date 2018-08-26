@@ -45,9 +45,9 @@ AMD FX™-8300 Eight-Core Processor
 ### `gcc --version`:
 
 >     gcc (SUSE Linux) 4.8.5
-    Copyright (C) 2015 Free Software Foundation, Inc.
-    This is free software; see the source for copying conditions. There is NO
-    warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+>     Copyright (C) 2015 Free Software Foundation, Inc.
+>     This is free software; see the source for copying conditions. There is NO
+>     warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 ---
 
