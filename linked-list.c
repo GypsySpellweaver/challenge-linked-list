@@ -29,21 +29,166 @@
 struct ListNode {
     void *data;             // pointer to what this node should hold
     struct ListNode *next;  // pointer to the next node in the list
+    /*
+     *  +------+------+
+     *  |      |      |
+     *  | data |   ------>
+     *  |      |      |
+     *  +------+------+
+     *
+     */
 };
 
 void walkList(struct ListNode *head, void (*display_proc)()) {
+    /*
+     * head: the current head_node of the list
+     * *display_proc: pointer to the procedure to display whatever is
+     *    held in the memory pointed to by the data field
+     */
     struct ListNode *curr_node = head;
+    /*
+     *   head_node ----->+
+     *                   |
+     *     +-------------+
+     *     |<------------- curr_node
+     *     V
+     *  +------+------+
+     *  |      |      |
+     *  | NULL |   ----->+
+     *  |      |      |  |
+     *  +------+------+  |
+     *                   |
+     *     +-------------+
+     *     |
+     *     V
+     *  +------+------+
+     *  |      |      |
+     *  | data |   ----->+
+     *  |      |      |  |
+     *  +------+------+  |
+     *                   |
+     *     +-------------+
+     *     |
+     *     V
+     *  +------+------+
+     *  |      |      |
+     *  | data |   ------> NULL
+     *  |      |      |
+     *  +------+------+
+     */
     while (curr_node->next != NULL) {
         (display_proc)(curr_node->next->data);
         curr_node = curr_node->next;
+    /*
+     *   head_node ----->+
+     *                   |
+     *     +-------------+
+     *     |
+     *     V
+     *  +------+------+
+     *  |      |      |
+     *  | NULL |   ----->+
+     *  |      |      |  |
+     *  +------+------+  |
+     *                   |
+     *     +-------------+
+     *     |<------------- curr_node
+     *     V
+     *  +------+------+
+     *  |      |      |
+     *  | data |   ----->+
+     *  |      |      |  |
+     *  +------+------+  |
+     *                   |
+     *     +-------------+
+     *     |
+     *     V
+     *  +------+------+
+     *  |      |      |
+     *  | data |   ------> NULL
+     *  |      |      |
+     *  +------+------+
+     */
     }
+    /*
+     *   head_node ----->+
+     *                   |
+     *     +-------------+
+     *     |
+     *     V
+     *  +------+------+
+     *  |      |      |
+     *  | NULL |   ----->+
+     *  |      |      |  |
+     *  +------+------+  |
+     *                   |
+     *     +-------------+
+     *     |
+     *     V
+     *  +------+------+
+     *  |      |      |
+     *  | data |   ----->+
+     *  |      |      |  |
+     *  +------+------+  |
+     *                   |
+     *     +-------------+
+     *     |<------------- curr_node
+     *     V
+     *  +------+------+
+     *  |      |      |
+     *  | data |   ------> NULL
+     *  |      |      |
+     *  +------+------+
+     */
 }
 
 int main() {
     // create the forever empty head node
     struct ListNode* head_node = NULL;
+    //  head_node ------> ??
     head_node = (struct ListNode*)malloc(sizeof(struct ListNode));
+    /*
+     *   head_node ----->+
+     *                   |
+     *     +-------------+
+     *     |
+     *     V
+     *  +------+------+
+     *  |      |      |
+     *  |  ??  |   ------> ??
+     *  |      |      |
+     *  +------+------+
+     *
+     */
     // make it point nowhere, start with an empty list
     head_node->next = NULL;
+    /*
+     *   head_node ----->+
+     *                   |
+     *     +-------------+
+     *     |
+     *     V
+     *  +------+------+
+     *  |      |      |
+     *  |  ??  |   ------> NULL
+     *  |      |      |
+     *  +------+------+
+     *
+     */
+    // make the data explicitly NULL for safety
+    head_node->data = NULL;
+    /*
+     *   head_node ----->+
+     *                   |
+     *     +-------------+
+     *     |
+     *     V
+     *  +------+------+
+     *  |      |      |
+     *  | NULL |   ------> NULL
+     *  |      |      |
+     *  +------+------+
+     *
+     */
     return 0;
 }
