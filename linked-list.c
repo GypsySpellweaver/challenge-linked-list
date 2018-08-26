@@ -31,6 +31,14 @@ struct ListNode {
     struct ListNode *next;  // pointer to the next node in the list
 };
 
+void walkList(struct ListNode *head, void (*display_proc)()) {
+    struct ListNode *curr_node = head;
+    while (curr_node->next != NULL) {
+        (display_proc)(curr_node->next->data);
+        curr_node = curr_node->next;
+    }
+}
+
 int main() {
     // create the forever empty head node
     struct ListNode* head_node = NULL;
