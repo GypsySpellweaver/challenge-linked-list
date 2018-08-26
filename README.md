@@ -24,7 +24,7 @@ Since I have never written any code in C, including the infamous _Hello World_ p
 
 This repository will likely have an unusually high number of commits, since I intend to document the developement process, and my learning, rather than only committing "working code" as is the normal practice for git repositories.
 
-Of course, I've never use `valgrind` either, so that will have to be installed, and learned, after I "think" I have the solution in hand. Testing for memory leaks with `valgrind` beforehand might considered cheating in this case, so I'll withhold its installation and use until I have my "final answer, Alex."
+Of course, I've never use `valgrind` either, so that will have to be installed, and learned, after I "think" I have the solution in hand. Testing for memory leaks with `valgrind` beforehand might be considered cheating in this case, so I'll withhold its installation and use until I have my "final answer, Alex."
 
 ---
 
