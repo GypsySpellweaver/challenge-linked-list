@@ -59,7 +59,9 @@ Copyright ©2018 Gypsy Spellwaver
 
 
   [a]: https://cseducators.stackexchange.com/a/5007/104
+  [c]: https://cseducators.stackexchange.com
   [l]: https://en.wikipedia.org/wiki/MIT_License
   [m]: https://opensource.org/licenses/MIT
   [q]: https://cseducators.stackexchange.com/q/5003/104
+  [s]: https://stackexchange.com
   [u]: https://cseducators.stackexchange.com/users/21/ncmathsadist
