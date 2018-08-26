@@ -27,11 +27,15 @@
 #include <stdlib.h>
 
 struct ListNode {
-    void *data;
-    struct ListNode *next;
+    void *data;             // pointer to what this node should hold
+    struct ListNode *next;  // pointer to the next node in the list
 };
 
 int main() {
-
+    // create the forever empty head node
+    struct ListNode* head_node = NULL;
+    head_node = (struct ListNode*)malloc(sizeof(struct ListNode));
+    // make it point nowhere, start with an empty list
+    head_node->next = NULL;
     return 0;
 }
