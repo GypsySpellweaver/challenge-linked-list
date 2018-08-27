@@ -25,6 +25,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 /* Pointers to the list, head_ptr, curr_ptr, etc., should always point
  * to the node that points to the target. head_ptr points to the node
@@ -139,6 +140,31 @@ void swapNodes(struct ListNode *a_ptr, struct ListNode *b_ptr) {
     a_ptr->next->data = b_ptr->next->data;
     b_ptr->next->data = temp;
     return;
+}
+
+struct ListNode* findNode(struct ListNode *head_ptr, void *target_ptr, bool (*match_proc)()) {
+    /*
+     * head_ptr: the current head_ptr of the list
+     * target_ptr: a pointer to what is being searched for in the list
+     * *match_proc: pointer to the procedure to compare what is in the
+     *      pointed to data and the target. Should be able to handle the
+     *      type of data itself, and return true/false based on a match.
+     *      What constitutes a "match" is beyond the concern of the list
+     *
+     * returns the first node in the list which causes the match_proc
+     * to return a true value. NULL if no match is found.
+     */
+    struct ListNode* found_ptr = NULL;
+    struct ListNode* curr_ptr = head_ptr;
+    while ( found_ptr == NULL && curr_ptr->next != NULL ) {
+        if ( (match_proc)(curr_ptr->next->data, target_ptr) ) {
+            found_ptr = curr_ptr;
+        }
+        else {
+            curr_ptr = curr_ptr->next;
+        }
+    }
+    return found_ptr;
 }
 
 int main() {
