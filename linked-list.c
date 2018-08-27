@@ -99,6 +99,30 @@ void appendNode(struct ListNode *head_ptr, void *new_data) {
     return;
 }
 
+void insertNodeAfter(struct ListNode *curr_ptr, void *new_data) {
+    /*
+     * curr_ptr: the pointer whos next points to the node after which
+     *      the new node should be added. (See comment at the top.)
+     * new_data: pointer to the new data, pointer value is supplied to
+     *      the procedure, not the data itself, which is of no concern
+     */
+    struct ListNode* new_node = newListNode(new_data);
+    new_node->next = curr_ptr->next->next;
+    curr_ptr->next->next = new_node;
+}
+
+void insertNodeBefore(struct ListNode *curr_ptr, void *new_data) {
+    /*
+     * curr_ptr: the pointer whos next points to the node before which
+     *      the new node should be added. (See comment at the top.)
+     * new_data: pointer to the new data, pointer value is supplied to
+     *      the procedure, not the data itself, which is of no concern
+     */
+    struct ListNode* new_node = newListNode(new_data);
+    new_node->next = curr_ptr->next;
+    curr_ptr->next = new_node;
+}
+
 int main() {
     // create the forever empty head node
     struct ListNode* head_ptr = newListNode(NULL);
