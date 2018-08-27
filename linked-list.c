@@ -135,22 +135,9 @@ void swapNodes(struct ListNode *a_ptr, struct ListNode *b_ptr) {
      * will __not__ switch with the swap, but keep their position in the
      * list relative to the head, not the switched nodes.
      */
-    struct ListNode* temp;
-    // trap the possibility that the two nodes are in sequence
-    if ( a_ptr->next->next == b_ptr->next ) {
-        // reverse them if necessary
-        temp = a_ptr;
-        a_ptr = b_ptr;
-        b_ptr = temp;
-    }
-    // trade the next value of the two target nodes
-    temp = a_ptr->next->next;
-    a_ptr->next->next = b_ptr->next->next;
-    b_ptr->next->next = temp;
-    // trade the two targets between their pervious nodes
-    temp = a_ptr->next;
-    a_ptr->next = b_ptr->next;
-    b_ptr->next = temp;
+    void *temp = a_ptr->next->data;
+    a_ptr->next->data = b_ptr->next->data;
+    b_ptr->next->data = temp;
     return;
 }
 
