@@ -42,12 +42,6 @@
 struct ListNode {
     void *data;             // pointer to what this node should hold
     struct ListNode *next;  // pointer to the next node in the list
-    /*
-     *  +------+------+
-     *  | data |   ------>
-     *  +------+------+
-     *
-     */
 };
 
 struct ListNode* newListNode(void *new_data) {
@@ -73,67 +67,10 @@ void walkList(struct ListNode *head_ptr, void (*display_proc)()) {
      *    held in the memory pointed to by the data field
      */
     struct ListNode *temp_ptr = head_ptr;
-    /*
-     *   head_ptr ------>+
-     *     +-------------+
-     *     |<------------- temp_ptr
-     *     V
-     *  +------+------+
-     *  | NULL |   ----->+
-     *  +------+------+  |
-     *     +-------------+
-     *     V
-     *  +------+------+
-     *  | data |   ----->+
-     *  +------+------+  |
-     *     +-------------+
-     *     V
-     *  +------+------+
-     *  | data |   ------> NULL
-     *  +------+------+
-     */
     while (temp_ptr->next != NULL) {
         (display_proc)(temp_ptr->next->data);
         temp_ptr = temp_ptr->next;
-    /*
-     *   head_ptr ------>+
-     *     +-------------+
-     *     V
-     *  +------+------+
-     *  | NULL |   ----->+
-     *  +------+------+  |
-     *     +-------------+
-     *     |<------------- temp_ptr
-     *     V
-     *  +------+------+
-     *  | data |   ----->+
-     *  +------+------+  |
-     *     +-------------+
-     *     V
-     *  +------+------+
-     *  | data |   ------> NULL
-     *  +------+------+
-     */
     }
-    /*
-     *   head_ptr ------>+
-     *     +-------------+
-     *     V
-     *  +------+------+
-     *  | NULL |   ----->+
-     *  +------+------+  |
-     *     +-------------+
-     *     V
-     *  +------+------+
-     *  | data |   ----->+
-     *  +------+------+  |
-     *     +-------------+
-     *     |<------------- temp_ptr
-     *     V
-     *  +------+------+
-     *  | data |   ------> NULL
-     *  +------+------+
-     */
 }
 
 void addNode(struct ListNode *head_ptr, void *new_data) {
@@ -143,116 +80,16 @@ void addNode(struct ListNode *head_ptr, void *new_data) {
      *      the procedure, not the data itself, which is of no concert
      */
     struct ListNode* new_node = newListNode(new_data);
-    /*
-     *    new_node ----->+
-     *     +-------------+
-     *     V
-     *  +------+------+
-     *  |*data |   ------> NULL
-     *  +------+------+
-     *
-     */
     struct ListNode* temp_ptr = head_ptr;
-    /*
-     *   head_ptr ------>+
-     *     +-------------+
-     *     |<------------- temp_ptr
-     *     V
-     *  +------+------+            new_node ----->+
-     *  | NULL |   ----->+          +-------------+
-     *  +------+------+  |          V
-     *     +-------------+       +------+------+
-     *     V                     |*data |   ------> NULL
-     *  +------+------+          +------+------+
-     *  | data |   ----->+
-     *  +------+------+  |
-     *     +-------------+
-     *     V
-     *  +------+------+
-     *  | data |   ------> NULL
-     *  +------+------+
-     */
     while ( temp_ptr->next != NULL ) {
         temp_ptr = temp_ptr->next;
-        /*
-         *   head_ptr ------>+
-         *     +-------------+
-         *     V
-         *  +------+------+
-         *  | NULL |   ----->+
-         *  +------+------+  |
-         *     +-------------+
-         *     |<------------- temp_ptr
-         *     V
-         *  +------+------+             new_node ----->+
-         *  | data |   ----->+           +-------------+
-         *  +------+------+  |           V
-         *     +-------------+        +------+------+
-         *     V                      |*data |   ------> NULL
-         *  +------+------+           +------+------+
-         *  | data |   ------> NULL
-         *  +------+------+
-         */
     }
-    /*
-     *   head_ptr ------>+
-     *     +-------------+
-     *     V
-     *  +------+------+
-     *  | NULL |   ----->+
-     *  +------+------+  |       new_node ----->+
-     *     +-------------+        +-------------+
-     *     V                      V
-     *  +------+------+        +------+------+
-     *  | data |   ----->+     |*data |   ------> NULL
-     *  +------+------+  |     +------+------+
-     *     +-------------+
-     *     |<------------- temp_ptr
-     *     V
-     *  +------+------+
-     *  | data |   ------> NULL
-     *  +------+------+
-     */
     temp_ptr->next = new_node;
-    /*
-     *   head_ptr ------>+
-     *     +-------------+
-     *     V
-     *  +------+------+
-     *  | NULL |   ----->+
-     *  +------+------+  |
-     *     +-------------+
-     *     V
-     *  +------+------+
-     *  | data |   ----->+
-     *  +------+------+  |
-     *     +-------------+
-     *     |<------------- temp_ptr
-     *     V
-     *  +------+------+
-     *  | data |   ------+
-     *  +------+------+  |
-     *     +-------------+
-     *     |<------------- new_node
-     *     V
-     *  +------+------+
-     *  |*data |   ------> NULL
-     *  +------+------+
-     */
     return;
 }
 
 int main() {
     // create the forever empty head node
     struct ListNode* head_ptr = newListNode(NULL);
-    /*
-     *   head_ptr ------>+
-     *     +-------------+
-     *     V
-     *  +------+------+
-     *  | NULL |   ------> NULL
-     *  +------+------+
-     *
-     */
     return 0;
 }
