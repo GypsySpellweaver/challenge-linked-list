@@ -50,6 +50,12 @@ struct ListNode {
      */
 };
 
+struct ListNode* newListNode(void *new_data) {
+    struct ListNode* new_node = (struct ListNode*)malloc(sizeof(struct ListNode));
+    new_node->data = new_data;
+    new_node->next = NULL;
+    return new_node;
+}
 void displayInt(int *data) {
     printf("%i\n", *data);
     return;
@@ -136,9 +142,7 @@ void addNode(struct ListNode *head_ptr, void *new_data) {
      * new_data: pointer to the new data, pointer value is supplied to
      *      the procedure, not the data itself, which is of no concert
      */
-    struct ListNode *new_node = (struct ListNode*)malloc(sizeof(struct ListNode));
-    new_node->data = new_data;
-    new_node->next = NULL;
+    struct ListNode* new_node = newListNode(new_data);
     /*
      *    new_node ----->+
      *     +-------------+
@@ -148,7 +152,7 @@ void addNode(struct ListNode *head_ptr, void *new_data) {
      *  +------+------+
      *
      */
-    struct ListNode *temp_ptr = head_ptr;
+    struct ListNode* temp_ptr = head_ptr;
     /*
      *   head_ptr ------>+
      *     +-------------+
@@ -240,31 +244,7 @@ void addNode(struct ListNode *head_ptr, void *new_data) {
 
 int main() {
     // create the forever empty head node
-    struct ListNode* head_ptr = NULL;
-    //  head_ptr -------> ??
-    head_ptr = (struct ListNode*)malloc(sizeof(struct ListNode));
-    /*
-     *   head_ptr ------>+
-     *     +-------------+
-     *     V
-     *  +------+------+
-     *  |  ??  |   ------> ??
-     *  +------+------+
-     *
-     */
-    // make it point nowhere, start with an empty list
-    head_ptr->next = NULL;
-    /*
-     *   head_ptr ------>+
-     *     +-------------+
-     *     V
-     *  +------+------+
-     *  |  ??  |   ------> NULL
-     *  +------+------+
-     *
-     */
-    // make the data explicitly NULL for safety
-    head_ptr->data = NULL;
+    struct ListNode* head_ptr = newListNode(NULL);
     /*
      *   head_ptr ------>+
      *     +-------------+
