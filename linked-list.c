@@ -56,9 +56,17 @@ void displayInt(int *data) {
     return;
 }
 
+bool matchInt(int *data, int *target) {
+    return (*data == *target);
+}
+
 void displayFloat(float *data) {
     printf("%f\n", *data);
     return;
+}
+
+bool matchFloat(float *data, float *target) {
+    return (*data == *target);
 }
 
 void walkList(struct ListNode *head_ptr, void (*display_proc)()) {
