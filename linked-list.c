@@ -26,6 +26,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/* Pointers to the list, head_ptr, curr_ptr, etc., should always point
+ * to the node that points to the target. head_ptr points to the node
+ * without data which points to the first item on the list.
+ * Hence, head_ptr->next = *first_node.
+ * If at some point the third item in the list is to be the target of a
+ * pointer, curr_ptr,
+ * then curr_ptr->next = *third_node
+ * and  curr_ptr       = *second_node
+ * Even though it might not seem correct, if there is a tail_ptr
+ * then tail_ptr->next = *last_node
+ * and  tail_ptr       = *second_last_node
+ */
+
 struct ListNode {
     void *data;             // pointer to what this node should hold
     struct ListNode *next;  // pointer to the next node in the list
@@ -47,17 +60,17 @@ void displayFloat(float *data) {
     return;
 }
 
-void walkList(struct ListNode *head, void (*display_proc)()) {
+void walkList(struct ListNode *head_ptr, void (*display_proc)()) {
     /*
-     * head: the current head_node of the list
+     * head: the current head_ptr of the list
      * *display_proc: pointer to the procedure to display whatever is
      *    held in the memory pointed to by the data field
      */
-    struct ListNode *curr_node = head;
+    struct ListNode *temp_ptr = head_ptr;
     /*
-     *   head_node ----->+
+     *   head_ptr ------>+
      *     +-------------+
-     *     |<------------- curr_node
+     *     |<------------- temp_ptr
      *     V
      *  +------+------+
      *  | NULL |   ----->+
@@ -73,18 +86,18 @@ void walkList(struct ListNode *head, void (*display_proc)()) {
      *  | data |   ------> NULL
      *  +------+------+
      */
-    while (curr_node->next != NULL) {
-        (display_proc)(curr_node->next->data);
-        curr_node = curr_node->next;
+    while (temp_ptr->next != NULL) {
+        (display_proc)(temp_ptr->next->data);
+        temp_ptr = temp_ptr->next;
     /*
-     *   head_node ----->+
+     *   head_ptr ------>+
      *     +-------------+
      *     V
      *  +------+------+
      *  | NULL |   ----->+
      *  +------+------+  |
      *     +-------------+
-     *     |<------------- curr_node
+     *     |<------------- temp_ptr
      *     V
      *  +------+------+
      *  | data |   ----->+
@@ -97,7 +110,7 @@ void walkList(struct ListNode *head, void (*display_proc)()) {
      */
     }
     /*
-     *   head_node ----->+
+     *   head_ptr ------>+
      *     +-------------+
      *     V
      *  +------+------+
@@ -109,7 +122,7 @@ void walkList(struct ListNode *head, void (*display_proc)()) {
      *  | data |   ----->+
      *  +------+------+  |
      *     +-------------+
-     *     |<------------- curr_node
+     *     |<------------- temp_ptr
      *     V
      *  +------+------+
      *  | data |   ------> NULL
@@ -119,11 +132,11 @@ void walkList(struct ListNode *head, void (*display_proc)()) {
 
 int main() {
     // create the forever empty head node
-    struct ListNode* head_node = NULL;
-    //  head_node ------> ??
-    head_node = (struct ListNode*)malloc(sizeof(struct ListNode));
+    struct ListNode* head_ptr = NULL;
+    //  head_ptr -------> ??
+    head_ptr = (struct ListNode*)malloc(sizeof(struct ListNode));
     /*
-     *   head_node ----->+
+     *   head_ptr ------>+
      *     +-------------+
      *     V
      *  +------+------+
@@ -132,9 +145,9 @@ int main() {
      *
      */
     // make it point nowhere, start with an empty list
-    head_node->next = NULL;
+    head_ptr->next = NULL;
     /*
-     *   head_node ----->+
+     *   head_ptr ------>+
      *     +-------------+
      *     V
      *  +------+------+
@@ -143,9 +156,9 @@ int main() {
      *
      */
     // make the data explicitly NULL for safety
-    head_node->data = NULL;
+    head_ptr->data = NULL;
     /*
-     *   head_node ----->+
+     *   head_ptr ------>+
      *     +-------------+
      *     V
      *  +------+------+
