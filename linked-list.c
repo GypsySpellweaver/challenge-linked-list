@@ -62,7 +62,7 @@ void displayFloat(float *data) {
 
 void walkList(struct ListNode *head_ptr, void (*display_proc)()) {
     /*
-     * head: the current head_ptr of the list
+     * head_ptr: the current head_ptr of the list
      * *display_proc: pointer to the procedure to display whatever is
      *    held in the memory pointed to by the data field
      */
@@ -128,6 +128,114 @@ void walkList(struct ListNode *head_ptr, void (*display_proc)()) {
      *  | data |   ------> NULL
      *  +------+------+
      */
+}
+
+void addNode(struct ListNode *head_ptr, void *new_data) {
+    /*
+     * head_ptr: the current head_ptr of the list
+     * new_data: pointer to the new data, pointer value is supplied to
+     *      the procedure, not the data itself, which is of no concert
+     */
+    struct ListNode *new_node = (struct ListNode*)malloc(sizeof(struct ListNode));
+    new_node->data = new_data;
+    new_node->next = NULL;
+    /*
+     *    new_node ----->+
+     *     +-------------+
+     *     V
+     *  +------+------+
+     *  |*data |   ------> NULL
+     *  +------+------+
+     *
+     */
+    struct ListNode *temp_ptr = head_ptr;
+    /*
+     *   head_ptr ------>+
+     *     +-------------+
+     *     |<------------- temp_ptr
+     *     V
+     *  +------+------+            new_node ----->+
+     *  | NULL |   ----->+          +-------------+
+     *  +------+------+  |          V
+     *     +-------------+       +------+------+
+     *     V                     |*data |   ------> NULL
+     *  +------+------+          +------+------+
+     *  | data |   ----->+
+     *  +------+------+  |
+     *     +-------------+
+     *     V
+     *  +------+------+
+     *  | data |   ------> NULL
+     *  +------+------+
+     */
+    while ( temp_ptr->next != NULL ) {
+        temp_ptr = temp_ptr->next;
+        /*
+         *   head_ptr ------>+
+         *     +-------------+
+         *     V
+         *  +------+------+
+         *  | NULL |   ----->+
+         *  +------+------+  |
+         *     +-------------+
+         *     |<------------- temp_ptr
+         *     V
+         *  +------+------+             new_node ----->+
+         *  | data |   ----->+           +-------------+
+         *  +------+------+  |           V
+         *     +-------------+        +------+------+
+         *     V                      |*data |   ------> NULL
+         *  +------+------+           +------+------+
+         *  | data |   ------> NULL
+         *  +------+------+
+         */
+    }
+    /*
+     *   head_ptr ------>+
+     *     +-------------+
+     *     V
+     *  +------+------+
+     *  | NULL |   ----->+
+     *  +------+------+  |       new_node ----->+
+     *     +-------------+        +-------------+
+     *     V                      V
+     *  +------+------+        +------+------+
+     *  | data |   ----->+     |*data |   ------> NULL
+     *  +------+------+  |     +------+------+
+     *     +-------------+
+     *     |<------------- temp_ptr
+     *     V
+     *  +------+------+
+     *  | data |   ------> NULL
+     *  +------+------+
+     */
+    temp_ptr->next = new_node;
+    /*
+     *   head_ptr ------>+
+     *     +-------------+
+     *     V
+     *  +------+------+
+     *  | NULL |   ----->+
+     *  +------+------+  |
+     *     +-------------+
+     *     V
+     *  +------+------+
+     *  | data |   ----->+
+     *  +------+------+  |
+     *     +-------------+
+     *     |<------------- temp_ptr
+     *     V
+     *  +------+------+
+     *  | data |   ------+
+     *  +------+------+  |
+     *     +-------------+
+     *     |<------------- new_node
+     *     V
+     *  +------+------+
+     *  |*data |   ------> NULL
+     *  +------+------+
+     */
+    return;
 }
 
 int main() {
