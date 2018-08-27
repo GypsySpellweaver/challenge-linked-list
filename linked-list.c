@@ -51,6 +51,7 @@ struct ListNode* newListNode(void *new_data) {
     new_node->next = NULL;
     return new_node;
 }
+
 void displayInt(int *data) {
     printf("%i\n", *data);
     return;
@@ -69,15 +70,15 @@ bool matchFloat(float *data, float *target) {
     return (*data == *target);
 }
 
-void walkList(struct ListNode *head_ptr, void (*display_proc)()) {
+void walkList(struct ListNode *head_ptr, void (*action_proc)()) {
     /*
      * head_ptr: the current head_ptr of the list
-     * *display_proc: pointer to the procedure to display whatever is
-     *    held in the memory pointed to by the data field
+     * *action_proc: pointer to the procedure for perfoming whatever
+     *       action the caller needs done to the contents of the data
      */
     struct ListNode *temp_ptr = head_ptr;
     while (temp_ptr->next != NULL) {
-        (display_proc)(temp_ptr->next->data);
+        (action_proc)(temp_ptr->next->data);
         temp_ptr = temp_ptr->next;
     }
     return;
@@ -173,6 +174,19 @@ struct ListNode* findNode(struct ListNode *head_ptr, void *target_ptr, bool (*ma
         }
     }
     return found_ptr;
+}
+
+void clearList(struct ListNode* head_ptr) {
+    struct ListNode *curr_node,  *next_node;
+    curr_node = head_ptr->next;
+    while ( curr_node != NULL ) {
+        next_node = curr_node->next;
+        curr_node->next = NULL;
+        free(curr_node);
+        curr_node = next_node;
+    }
+    head_ptr->next = NULL;
+    return;
 }
 
 int main() {
