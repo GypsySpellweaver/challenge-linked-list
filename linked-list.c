@@ -37,6 +37,16 @@ struct ListNode {
      */
 };
 
+void displayInt(int *data) {
+    printf("%i\n", *data);
+    return;
+}
+
+void displayFloat(float *data) {
+    printf("%f\n", *data);
+    return;
+}
+
 void walkList(struct ListNode *head, void (*display_proc)()) {
     /*
      * head: the current head_node of the list
