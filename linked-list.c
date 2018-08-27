@@ -71,6 +71,7 @@ void walkList(struct ListNode *head_ptr, void (*display_proc)()) {
         (display_proc)(temp_ptr->next->data);
         temp_ptr = temp_ptr->next;
     }
+    return;
 }
 
 void prependNode(struct ListNode *head_ptr, void *new_data) {
@@ -82,6 +83,7 @@ void prependNode(struct ListNode *head_ptr, void *new_data) {
     struct ListNode *new_node = newListNode(new_data);
     new_node->next = head_ptr->next;
     head_ptr->next = new_node;
+    return;
 }
 
 void appendNode(struct ListNode *head_ptr, void *new_data) {
@@ -109,6 +111,7 @@ void insertNodeAfter(struct ListNode *curr_ptr, void *new_data) {
     struct ListNode* new_node = newListNode(new_data);
     new_node->next = curr_ptr->next->next;
     curr_ptr->next->next = new_node;
+    return;
 }
 
 void insertNodeBefore(struct ListNode *curr_ptr, void *new_data) {
@@ -121,6 +124,34 @@ void insertNodeBefore(struct ListNode *curr_ptr, void *new_data) {
     struct ListNode* new_node = newListNode(new_data);
     new_node->next = curr_ptr->next;
     curr_ptr->next = new_node;
+    return;
+}
+
+void swapNodes(struct ListNode *a_ptr, struct ListNode *b_ptr) {
+    /*
+     * a_ptr and b_ptr point to a pair of nodes, once removed from their
+     * address, as all _ptr values are. a_ptr->next will be what was in
+     * b_ptr->next, and visa-versa. The nodes following the swap nodes
+     * will __not__ switch with the swap, but keep their position in the
+     * list relative to the head, not the switched nodes.
+     */
+    struct ListNode* temp;
+    // trap the possibility that the two nodes are in sequence
+    if ( a_ptr->next->next == b_ptr->next ) {
+        // reverse them if necessary
+        temp = a_ptr;
+        a_ptr = b_ptr;
+        b_ptr = temp;
+    }
+    // trade the next value of the two target nodes
+    temp = a_ptr->next->next;
+    a_ptr->next->next = b_ptr->next->next;
+    b_ptr->next->next = temp;
+    // trade the two targets between their pervious nodes
+    temp = a_ptr->next;
+    a_ptr->next = b_ptr->next;
+    b_ptr->next = temp;
+    return;
 }
 
 int main() {
