@@ -73,11 +73,22 @@ void walkList(struct ListNode *head_ptr, void (*display_proc)()) {
     }
 }
 
-void addNode(struct ListNode *head_ptr, void *new_data) {
+void prependNode(struct ListNode *head_ptr, void *new_data) {
     /*
      * head_ptr: the current head_ptr of the list
      * new_data: pointer to the new data, pointer value is supplied to
-     *      the procedure, not the data itself, which is of no concert
+     *      the procedure, not the data itself, which is of no concern
+     */
+    struct ListNode *new_node = newListNode(new_data);
+    new_node->next = head_ptr->next;
+    head_ptr->next = new_node;
+}
+
+void appendNode(struct ListNode *head_ptr, void *new_data) {
+    /*
+     * head_ptr: the current head_ptr of the list
+     * new_data: pointer to the new data, pointer value is supplied to
+     *      the procedure, not the data itself, which is of no concern
      */
     struct ListNode* new_node = newListNode(new_data);
     struct ListNode* temp_ptr = head_ptr;
