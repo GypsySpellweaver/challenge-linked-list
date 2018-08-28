@@ -53,20 +53,36 @@ struct ListNode* newListNode(void *new_data) {
 }
 
 void displayInt(int *data) {
+    if ( NULL == data ) {
+        printf("Sanity check failure in displayInt.\n");
+        return;
+    }
     printf("%i\n", *data);
     return;
 }
 
 bool matchInt(int *data, int *target) {
+    if ( NULL == data ) {
+        printf("Sanity check failure in matchInt.\n");
+        return false;
+    }
     return (*data == *target);
 }
 
 void displayFloat(float *data) {
+    if ( NULL == data ) {
+        printf("Sanity check failure in displayFloat.\n");
+        return;
+    }
     printf("%f\n", *data);
     return;
 }
 
 bool matchFloat(float *data, float *target) {
+    if ( NULL == data ) {
+        printf("Sanity check failure in matchFloat.\n");
+        return false;
+    }
     return (*data == *target);
 }
 
