@@ -202,6 +202,9 @@ void swapNodePointers(struct ListNode *index_a_ptr, struct ListNode *index_b_ptr
         printf("Attempt to swap an empty node is not allowed.\n");
         return;
     }
+    if ( index_a_ptr == index_b_ptr ) {
+        return; // no point wasting time swapping a node with itself
+    }
     if ( index_a_ptr->next == index_b_ptr ) {
         index_a_ptr->next = index_b_ptr->next;
         index_b_ptr->next = index_b_ptr->next->next;
@@ -240,6 +243,9 @@ void swapNodes(struct ListNode *index_a_ptr, struct ListNode *index_b_ptr) {
     if ( NULL == index_a_ptr->next || NULL == index_b_ptr->next ) {
         printf("Attempt to swap an empty node is not allowed.\n");
         return;
+    }
+    if ( index_a_ptr == index_b_ptr ) {
+        return; // no point wasting time swapping a node with itself
     }
     void *temp = index_a_ptr->next->data;
     index_a_ptr->next->data = index_b_ptr->next->data;
