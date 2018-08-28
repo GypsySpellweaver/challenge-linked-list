@@ -76,10 +76,10 @@ void walkList(struct ListNode *head_ptr, void (*action_proc)()) {
      * *action_proc: pointer to the procedure for perfoming whatever
      *       action the caller needs done to the contents of the data
      */
-    struct ListNode *temp_ptr = head_ptr;
-    while (temp_ptr->next != NULL) {
-        (action_proc)(temp_ptr->next->data);
-        temp_ptr = temp_ptr->next;
+    struct ListNode *index_ptr = head_ptr;
+    while (index_ptr->next != NULL) {
+        (action_proc)(index_ptr->next->data);
+        index_ptr = index_ptr->next;
     }
     return;
 }
@@ -103,51 +103,53 @@ void appendNode(struct ListNode *head_ptr, void *new_data) {
      *      the procedure, not the data itself, which is of no concern
      */
     struct ListNode* new_node = newListNode(new_data);
-    struct ListNode* temp_ptr = head_ptr;
-    while ( temp_ptr->next != NULL ) {
-        temp_ptr = temp_ptr->next;
+    struct ListNode* index_ptr = head_ptr;
+    while ( index_ptr->next != NULL ) {
+        index_ptr = index_ptr->next;
     }
-    temp_ptr->next = new_node;
+    index_ptr->next = new_node;
     return;
 }
 
-void insertNodeAfter(struct ListNode *curr_ptr, void *new_data) {
+void insertNodeAfter(struct ListNode *index_ptr, void *new_data) {
     /*
-     * curr_ptr: the pointer whos next points to the node after which
+     * index_ptr: the pointer whos next points to the node after which
      *      the new node should be added. (See comment at the top.)
      * new_data: pointer to the new data, pointer value is supplied to
      *      the procedure, not the data itself, which is of no concern
      */
     struct ListNode* new_node = newListNode(new_data);
-    new_node->next = curr_ptr->next->next;
-    curr_ptr->next->next = new_node;
+    new_node->next = index_ptr->next->next;
+    index_ptr->next->next = new_node;
     return;
 }
 
-void insertNodeBefore(struct ListNode *curr_ptr, void *new_data) {
+void insertNodeBefore(struct ListNode *index_ptr, void *new_data) {
     /*
-     * curr_ptr: the pointer whos next points to the node before which
+     * index_ptr: the pointer whos next points to the node before which
      *      the new node should be added. (See comment at the top.)
      * new_data: pointer to the new data, pointer value is supplied to
      *      the procedure, not the data itself, which is of no concern
      */
     struct ListNode* new_node = newListNode(new_data);
-    new_node->next = curr_ptr->next;
-    curr_ptr->next = new_node;
+    new_node->next = index_ptr->next;
+    index_ptr->next = new_node;
     return;
 }
 
-void swapNodes(struct ListNode *a_ptr, struct ListNode *b_ptr) {
+
+void swapNodes(struct ListNode *index_a_ptr, struct ListNode *index_b_ptr) {
     /*
-     * a_ptr and b_ptr point to a pair of nodes, once removed from their
-     * address, as all _ptr values are. a_ptr->next will be what was in
-     * b_ptr->next, and visa-versa. The nodes following the swap nodes
-     * will __not__ switch with the swap, but keep their position in the
-     * list relative to the head, not the switched nodes.
+     * index_a_ptr and index_b_ptr point to a pair of nodes, once
+     * removed from their address, as all _ptr values are. Thus
+     * index_a_ptr->next will be what was in index_b_ptr->next, and
+     * visa-versa. The nodes following the swap nodes will __not__
+     * switch with the swap, but keep their position in the list
+     * relative to the head, not the switched nodes.
      */
-    void *temp = a_ptr->next->data;
-    a_ptr->next->data = b_ptr->next->data;
-    b_ptr->next->data = temp;
+    void *temp = index_a_ptr->next->data;
+    index_a_ptr->next->data = index_b_ptr->next->data;
+    index_b_ptr->next->data = temp;
     return;
 }
 
@@ -164,26 +166,26 @@ struct ListNode* findNode(struct ListNode *head_ptr, void *target_ptr, bool (*ma
      * to return a true value. NULL if no match is found.
      */
     struct ListNode* found_ptr = NULL;
-    struct ListNode* curr_ptr = head_ptr;
-    while ( found_ptr == NULL && curr_ptr->next != NULL ) {
-        if ( (match_proc)(curr_ptr->next->data, target_ptr) ) {
-            found_ptr = curr_ptr;
+    struct ListNode* index_ptr = head_ptr;
+    while ( found_ptr == NULL && index_ptr->next != NULL ) {
+        if ( (match_proc)(index_ptr->next->data, target_ptr) ) {
+            found_ptr = index_ptr;
         }
         else {
-            curr_ptr = curr_ptr->next;
+            index_ptr = index_ptr->next;
         }
     }
     return found_ptr;
 }
 
 void clearList(struct ListNode* head_ptr) {
-    struct ListNode *curr_node,  *next_node;
-    curr_node = head_ptr->next;
-    while ( curr_node != NULL ) {
-        next_node = curr_node->next;
-        curr_node->next = NULL;
-        free(curr_node);
-        curr_node = next_node;
+    struct ListNode *index_node,  *next_node;
+    index_node = head_ptr->next;
+    while ( index_node != NULL ) {
+        next_node = index_node->next;
+        index_node->next = NULL;
+        free(index_node);
+        index_node = next_node;
     }
     head_ptr->next = NULL;
     return;
