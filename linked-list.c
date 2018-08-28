@@ -76,6 +76,16 @@ void walkList(struct ListNode *head_ptr, void (*action_proc)()) {
      * *action_proc: pointer to the procedure for perfoming whatever
      *       action the caller needs done to the contents of the data
      */
+    if ( NULL == head_ptr ) {
+        printf("Sanity check failure in walkList procedure.\n");
+        return;
+    }
+    if ( NULL == action_proc ) {
+        return; // don't bother walking the list if their is no action
+    }
+    if ( NULL == head_ptr->next ) {
+        return; // don't bother walking an empty list
+    }
     struct ListNode *index_ptr = head_ptr;
     while (index_ptr->next != NULL) {
         (action_proc)(index_ptr->next->data);
@@ -90,6 +100,10 @@ void prependNode(struct ListNode *head_ptr, void *new_data) {
      * new_data: pointer to the new data, pointer value is supplied to
      *      the procedure, not the data itself, which is of no concern
      */
+    if ( NULL == head_ptr ) {
+        printf("Sanity check failure in prependNode procedure.\n");
+        return;
+    }
     struct ListNode *new_node = newListNode(new_data);
     new_node->next = head_ptr->next;
     head_ptr->next = new_node;
@@ -102,6 +116,10 @@ void appendNode(struct ListNode *head_ptr, void *new_data) {
      * new_data: pointer to the new data, pointer value is supplied to
      *      the procedure, not the data itself, which is of no concern
      */
+    if ( NULL == head_ptr ) {
+        printf("Sanity check failure in appendNode procedure.\n");
+        return;
+    }
     struct ListNode* new_node = newListNode(new_data);
     struct ListNode* index_ptr = head_ptr;
     while ( index_ptr->next != NULL ) {
@@ -118,6 +136,10 @@ void insertNodeAfter(struct ListNode *index_ptr, void *new_data) {
      * new_data: pointer to the new data, pointer value is supplied to
      *      the procedure, not the data itself, which is of no concern
      */
+    if ( NULL == index_ptr ) {
+        printf("Sanity check failure in insertNodeAfter procedure.\n");
+        return;
+    }
     struct ListNode* new_node = newListNode(new_data);
     if ( index_ptr->next == NULL ) {
         new_node->next = NULL;
@@ -137,6 +159,10 @@ void insertNodeBefore(struct ListNode *index_ptr, void *new_data) {
      * new_data: pointer to the new data, pointer value is supplied to
      *      the procedure, not the data itself, which is of no concern
      */
+    if ( NULL == index_ptr ) {
+        printf("Sanity check failure in insertNodeBefore procedure.\n");
+        return;
+    }
     struct ListNode* new_node = newListNode(new_data);
     new_node->next = index_ptr->next;
     index_ptr->next = new_node;
@@ -152,6 +178,14 @@ void swapNodes(struct ListNode *index_a_ptr, struct ListNode *index_b_ptr) {
      * switch with the swap, but keep their position in the list
      * relative to the head, not the switched nodes.
      */
+    if ( NULL == index_a_ptr || NULL == index_b_ptr ) {
+        printf("Sanity check failure in swapNodes procedure.\n");
+        return;
+    }
+    if ( NULL == index_a_ptr->next || NULL == index_b_ptr->next ) {
+        printf("Attempt to swap an empty node is not allowed.\n");
+        return;
+    }
     void *temp = index_a_ptr->next->data;
     index_a_ptr->next->data = index_b_ptr->next->data;
     index_b_ptr->next->data = temp;
@@ -170,6 +204,13 @@ struct ListNode* findNode(struct ListNode *head_ptr, void *target_ptr, bool (*ma
      * returns the first node in the list which causes the match_proc
      * to return a true value. NULL if no match is found.
      */
+    if ( NULL == head_ptr || NULL == match_proc ) {
+        printf("Sanity check failure in findNode procedure.\n");
+        return NULL;
+    }
+    if ( NULL == head_ptr->next ) {
+        return NULL; // don't bother searching an empty list
+    }
     struct ListNode* found_ptr = NULL;
     struct ListNode* index_ptr = head_ptr;
     while ( found_ptr == NULL && index_ptr->next != NULL ) {
@@ -184,6 +225,13 @@ struct ListNode* findNode(struct ListNode *head_ptr, void *target_ptr, bool (*ma
 }
 
 void clearList(struct ListNode* head_ptr) {
+    if ( NULL == head_ptr ) {
+        printf("Sanity check failure in clearList procedure.\n");
+        return;
+    }
+    if ( NULL == head_ptr->next ) {
+        return; // don't bother emptying an empty list
+    }
     struct ListNode *index_node,  *next_node;
     index_node = head_ptr->next;
     while ( index_node != NULL ) {
@@ -202,6 +250,10 @@ int countNodes(struct ListNode *head_ptr) {
      * Find out how many nodes there are in the list. The "blank" node
      *     that head_ptr points to is not included
      */
+    if ( NULL == head_ptr ) {
+        printf("Sanity check failure in countNodes procedure.\n");
+        return 0;
+    }
     int node_count = 0;
     struct ListNode* index_ptr = head_ptr;
     while ( index_ptr->next != NULL ) {
@@ -217,6 +269,10 @@ void deleteNode(struct ListNode *index_ptr) {
      * removes the node, and frees the memory, without returning any
      * data.
      */
+    if ( NULL == index_ptr || NULL == index_ptr->next ) {
+        printf("Sanity check failure in deleteNode procedure.\n");
+        return;
+    }
     struct ListNode* target_node = index_ptr->next;
     index_ptr->next = index_ptr->next->next;
     free(target_node);
@@ -229,6 +285,10 @@ void* removeNode(struct ListNode *index_ptr) {
      * removes the node, and frees the memory, returning a pointer to
      * the data to the caller
      */
+    if ( NULL == index_ptr || NULL == index_ptr->next ) {
+        printf("Sanity check failure in removeNode procedure.\n");
+        return NULL;
+    }
     struct ListNode* target_node = index_ptr->next;
     void* data_ptr = target_node->data;
     index_ptr->next = index_ptr->next->next;
