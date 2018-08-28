@@ -205,6 +205,31 @@ int countNodes(struct ListNode *head_ptr) {
     return node_count;
 }
 
+void deleteNode(struct ListNode *index_ptr) {
+    /*
+     * index_ptr: index_ptr->next is the node to remove
+     * removes the node, and frees the memory, without returning any
+     * data.
+     */
+    struct ListNode* target_node = index_ptr->next;
+    index_ptr->next = index_ptr->next->next;
+    free(target_node);
+    return;
+}
+
+void* removeNode(struct ListNode *index_ptr) {
+    /*
+     * index_ptr: index_ptr->next is the node to remove
+     * removes the node, and frees the memory, returning a pointer to
+     * the data to the caller
+     */
+    struct ListNode* target_node = index_ptr->next;
+    void* data_ptr = target_node->data;
+    index_ptr->next = index_ptr->next->next;
+    free(target_node);
+    return data_ptr;
+}
+
 int main() {
     // create the forever empty head node
     struct ListNode* head_ptr = newListNode(NULL);
