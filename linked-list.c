@@ -275,7 +275,15 @@ struct ListNode* findNode(struct ListNode *head_ptr, void *target_ptr, bool (*ma
     struct ListNode* found_ptr = NULL;
     struct ListNode* index_ptr = head_ptr;
     while ( found_ptr == NULL && index_ptr->next != NULL ) {
-        if ( (match_proc)(index_ptr->next->data, target_ptr) ) {
+        if ( NULL == target_prt ) { // save a procedure call for NULL
+            if ( NULL == index_ptr->next->data ) { // as the target
+                found_ptr = index_ptr;
+            }
+            else {
+                index_ptr = index_ptr->next;
+            }
+        }
+        else if ( (match_proc)(index_ptr->next->data, target_ptr) ) {
             found_ptr = index_ptr;
         }
         else {
