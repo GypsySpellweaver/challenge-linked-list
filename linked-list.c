@@ -157,10 +157,9 @@ void insertNodeAfter(struct ListNode *index_ptr, void *new_data) {
         return;
     }
     struct ListNode* new_node = newListNode(new_data);
-    if ( index_ptr->next == NULL ) {
-        new_node->next = NULL;
-        index_ptr->next = new_node;
-    }
+    if ( index_ptr->next == NULL ) {  // if there is no node to insert
+        index_ptr->next = new_node;   // "after" then it is the end of
+    }                                 // the list, act like appendNode
     else {
         new_node->next = index_ptr->next->next;
         index_ptr->next->next = new_node;
@@ -275,7 +274,7 @@ struct ListNode* findNode(struct ListNode *head_ptr, void *target_ptr, bool (*ma
     struct ListNode* found_ptr = NULL;
     struct ListNode* index_ptr = head_ptr;
     while ( found_ptr == NULL && index_ptr->next != NULL ) {
-        if ( NULL == target_prt ) { // save a procedure call for NULL
+        if ( NULL == target_ptr ) { // save a procedure call for NULL
             if ( NULL == index_ptr->next->data ) { // as the target
                 found_ptr = index_ptr;
             }
@@ -338,8 +337,12 @@ void deleteNode(struct ListNode *index_ptr) {
      * removes the node, and frees the memory, without returning any
      * data.
      */
-    if ( NULL == index_ptr || NULL == index_ptr->next ) {
+    if ( NULL == index_ptr ) {
         printf("Sanity check failure in deleteNode procedure.\n");
+        return;
+    }
+    if ( NULL == index_ptr->next ) {
+        printf("Nothing to delete in deleteNode procedure.\n");
         return;
     }
     struct ListNode* target_node = index_ptr->next;
@@ -354,8 +357,12 @@ void* removeNode(struct ListNode *index_ptr) {
      * removes the node, and frees the memory, returning a pointer to
      * the data to the caller
      */
-    if ( NULL == index_ptr || NULL == index_ptr->next ) {
+    if ( NULL == index_ptr ) {
         printf("Sanity check failure in removeNode procedure.\n");
+        return NULL;
+    }
+    if ( NULL == index_ptr->next ) {
+        printf("Nothing to remove in removeNode procedure.\n");
         return NULL;
     }
     struct ListNode* target_node = index_ptr->next;
@@ -367,6 +374,6 @@ void* removeNode(struct ListNode *index_ptr) {
 
 int main() {
     // create the forever empty head node
-    struct ListNode* head_ptr = newListNode(NULL);
+//    struct ListNode* head_ptr = newListNode(NULL);
     return 0;
 }
