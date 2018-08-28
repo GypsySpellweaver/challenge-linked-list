@@ -137,7 +137,6 @@ void insertNodeBefore(struct ListNode *index_ptr, void *new_data) {
     return;
 }
 
-
 void swapNodes(struct ListNode *index_a_ptr, struct ListNode *index_b_ptr) {
     /*
      * index_a_ptr and index_b_ptr point to a pair of nodes, once
@@ -189,6 +188,21 @@ void clearList(struct ListNode* head_ptr) {
     }
     head_ptr->next = NULL;
     return;
+}
+
+int countNodes(struct ListNode *head_ptr) {
+    /*
+     * head_ptr: the current head_ptr of the list
+     * Find out how many nodes there are in the list. The "blank" node
+     *     that head_ptr points to is not included
+     */
+    int node_count = 0;
+    struct ListNode* index_ptr = head_ptr;
+    while ( index_ptr->next != NULL ) {
+        index_ptr = index_ptr->next;
+        node_count++;
+    }
+    return node_count;
 }
 
 int main() {
