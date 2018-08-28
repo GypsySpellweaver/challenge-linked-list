@@ -119,8 +119,14 @@ void insertNodeAfter(struct ListNode *index_ptr, void *new_data) {
      *      the procedure, not the data itself, which is of no concern
      */
     struct ListNode* new_node = newListNode(new_data);
-    new_node->next = index_ptr->next->next;
-    index_ptr->next->next = new_node;
+    if ( index_ptr->next == NULL ) {
+        new_node->next = NULL;
+        index_ptr->next = new_node;
+    }
+    else {
+        new_node->next = index_ptr->next->next;
+        index_ptr->next->next = new_node;
+    }
     return;
 }
 
