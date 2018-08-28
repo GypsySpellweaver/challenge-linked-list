@@ -169,6 +169,45 @@ void insertNodeBefore(struct ListNode *index_ptr, void *new_data) {
     return;
 }
 
+void swapNodePointers(struct ListNode *index_a_ptr, struct ListNode *index_b_ptr) {
+    /*
+     * index_a_ptr and index_b_ptr point to a pair of nodes, once
+     * removed from their address, as all _ptr values are. Thus
+     * index_a_ptr->next will be what was in index_b_ptr->next, and
+     * visa-versa. The nodes following the swap nodes will __not__
+     * switch with the swap, but keep their position in the list
+     * relative to the head, not the switched nodes.
+     */
+    if ( NULL == index_a_ptr || NULL == index_b_ptr ) {
+        printf("Sanity check failure in swapNodePointers procedure.\n");
+        return;
+    }
+    if ( NULL == index_a_ptr->next || NULL == index_b_ptr->next ) {
+        printf("Attempt to swap an empty node is not allowed.\n");
+        return;
+    }
+    if ( index_a_ptr->next == index_b_ptr ) {
+        index_a_ptr->next = index_b_ptr->next;
+        index_b_ptr->next = index_b_ptr->next->next;
+        index_a_ptr->next->next = index_b_ptr;
+    }
+    else if ( index_b_ptr->next == index_a_ptr ) {
+        index_b_ptr->next = index_a_ptr->next;
+        index_a_ptr->next = index_a_ptr->next->next;
+        index_b_ptr->next->next = index_a_ptr;
+    }
+    else {
+        struct ListNode* a_follow = index_a_ptr->next->next;
+        struct ListNode* b_follow = index_b_ptr->next->next;
+        struct ListNode* temp_ptr = index_a_ptr->next;
+        index_a_ptr->next = index_b_ptr->next;
+        index_b_ptr->next = temp_ptr;
+        index_a_ptr->next->next = a_follow;
+        index_b_ptr->next->next = b_follow;
+    }
+    return;
+}
+
 void swapNodes(struct ListNode *index_a_ptr, struct ListNode *index_b_ptr) {
     /*
      * index_a_ptr and index_b_ptr point to a pair of nodes, once
