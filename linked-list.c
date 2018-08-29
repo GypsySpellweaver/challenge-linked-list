@@ -252,19 +252,19 @@ void swapNodes(struct ListNode *index_a_ptr, struct ListNode *index_b_ptr) {
     return;
 }
 
-struct ListNode* findNode(struct ListNode *head_ptr, void *target_ptr, bool (*match_proc)()) {
+struct ListNode* findNode(struct ListNode *head_ptr, void *target_ptr, bool (*match_func)()) {
     /*
      * head_ptr: the current head_ptr of the list
      * target_ptr: a pointer to what is being searched for in the list
-     * *match_proc: pointer to the procedure to compare what is in the
+     * *match_func: pointer to the procedure to compare what is in the
      *      pointed to data and the target. Should be able to handle the
      *      type of data itself, and return true/false based on a match.
      *      What constitutes a "match" is beyond the concern of the list
      *
-     * returns the first node in the list which causes the match_proc
+     * returns the first node in the list which causes the match_func
      * to return a true value. NULL if no match is found.
      */
-    if ( NULL == head_ptr || NULL == match_proc ) {
+    if ( NULL == head_ptr || NULL == match_func ) {
         printf("Sanity check failure in findNode procedure.\n");
         return NULL;
     }
@@ -282,7 +282,7 @@ struct ListNode* findNode(struct ListNode *head_ptr, void *target_ptr, bool (*ma
                 index_ptr = index_ptr->next;
             }
         }
-        else if ( (match_proc)(index_ptr->next->data, target_ptr) ) {
+        else if ( (match_func)(index_ptr->next->data, target_ptr) ) {
             found_ptr = index_ptr;
         }
         else {
