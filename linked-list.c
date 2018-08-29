@@ -308,7 +308,7 @@ struct ListNode* findNode(struct ListNode *head_ptr, void *target_ptr, bool (*ma
     return found_ptr;
 }
 
-void clearList(struct ListNode* head_ptr) {
+void clearList(struct ListNode* head_ptr, void (*clear_proc)()) {
     if ( NULL == head_ptr ) {
         printf("Sanity check failure in clearList procedure.\n");
         return;
@@ -321,6 +321,9 @@ void clearList(struct ListNode* head_ptr) {
     while ( index_node != NULL ) {
         next_node = index_node->next;
         index_node->next = NULL;
+        if ( NULL != clear_proc ) {
+            (clear_proc)(index_node->data);
+        }
         free(index_node);
         index_node = next_node;
     }
@@ -347,7 +350,7 @@ int countNodes(struct ListNode *head_ptr) {
     return node_count;
 }
 
-void deleteNode(struct ListNode *index_ptr) {
+void deleteNode(struct ListNode *index_ptr, void (*clear_proc)()) {
     /*
      * index_ptr: index_ptr->next is the node to remove
      * removes the node, and frees the memory, without returning any
@@ -363,6 +366,9 @@ void deleteNode(struct ListNode *index_ptr) {
     }
     struct ListNode* target_node = index_ptr->next;
     index_ptr->next = index_ptr->next->next;
+    if ( NULL != clear_proc ) {
+        (clear_proc)(target_node->data);
+    }
     free(target_node);
     return;
 }
