@@ -69,6 +69,14 @@ bool matchInt(int *data, int *target) {
     return (*data == *target);
 }
 
+int randomInt(int limit) {
+    /*
+     * Generate a pseudo-random integer from 1 to limit
+     * Uniformity is not a major concern, so nothing elaborate is done
+     */
+    return (rand() % limit) + 1;
+}
+
 void displayFloat(float *data) {
     if ( NULL == data ) {
         printf("Sanity check failure in displayFloat.\n");
@@ -84,6 +92,14 @@ bool matchFloat(float *data, float *target) {
         return false;
     }
     return (*data == *target);
+}
+
+float randomReal(float limit) {
+    /*
+     * Generate a pseudo-random real (float) number in the range 0-limit
+     * Uniformity is not a major concern, so nothing elaborate is done
+     */
+    return (float)(((double)rand()/(double)(RAND_MAX)) * (double)(limit));
 }
 
 void walkList(struct ListNode *head_ptr, void (*action_proc)()) {
