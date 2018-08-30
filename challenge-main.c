@@ -46,14 +46,14 @@
 
 int main() {
     srand(time(NULL));
-    sanityChecksInt();
-    sanityChecksFloat();
-    workOutWithEmptyList();
-    workOutWithListOfOne();
-    workOutWithGivenNumbers();
-    workOutWithRandomNumbers(11100);
+//     sanityChecksInt();
+//     sanityChecksFloat();
+//     workOutWithEmptyList();
+//     workOutWithListOfOne();
+//     workOutWithGivenNumbers();
+//     workOutWithRandomNumbers(11100);
     LLNode* random_head_ptr = newListNode(NULL);
-    workOutWithRandomNumbersRemotely(12345, random_head_ptr);
+    workOutWithRandomNumbersRemotely(234567, random_head_ptr);
     workOutWithRandomNumbersRemotelyFinal(random_head_ptr);
     free(random_head_ptr);
     return 0;
