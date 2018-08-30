@@ -43,6 +43,27 @@
  * with thousands of entries.
  */
 
+static void splitLeftRight(LLNode* head_ptr, LLNode* left_ptr, LLNode* right_ptr) {
+    // list of one, or empty, nothing to split, return what we received
+    if (head_ptr->next == NULL || head_ptr->next->next == NULL) {
+        left_ptr->next = head_ptr->next;
+        right_ptr->next = NULL;
+        return;
+    }
+    LLNode* two_stepper = head_ptr->next;
+    LLNode* one_stepper = head_ptr;
+
+    while ( NULL != two_stepper ) {
+        two_stepper = two_stepper->next;
+        if ( NULL != two_stepper ) {
+            two_stepper = two_stepper->next;
+            one_stepper = one_stepper->next;
+        }
+    }
+    left_ptr->next = head_ptr->next;
+    right_ptr->next = one_stepper->next;
+    one_stepper->next = NULL;
+}
 
 static LLNode* sortedMerge(LLNode* left_ptr, LLNode* right_ptr, enum cmp (*cmp_func)()) {
     // empty left, use the right, even if NULL
