@@ -26,15 +26,35 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <time.h>
 
 #include "help-int.c"
 #include "help-float.c"
 #include "single-link-list.c"
 #include "single-link-list-sort.c"
 
+/*
+ * the test packages
+ */
+#include "_sanity.c"
+#include "_empty.c"
+#include "_with-one.c"
+#include "_given-numbers.c"
+#include "_random-numbers.c"
+#include "_remote.c"
+
 
 int main() {
-//    /* create the forever empty head node */
-//    LLNode* head_ptr = newListNode(NULL);
+    srand(time(NULL));
+    sanityChecksInt();
+    sanityChecksFloat();
+    workOutWithEmptyList();
+    workOutWithListOfOne();
+    workOutWithGivenNumbers();
+    workOutWithRandomNumbers(11100);
+    LLNode* random_head_ptr = newListNode(NULL);
+    workOutWithRandomNumbersRemotely(12345, random_head_ptr);
+    workOutWithRandomNumbersRemotelyFinal(random_head_ptr);
+    free(random_head_ptr);
     return 0;
 }
