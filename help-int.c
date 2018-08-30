@@ -34,6 +34,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include "compare-enum.c"
 
 void displayInt(int *data) {
     /*
@@ -46,6 +47,15 @@ void displayInt(int *data) {
     }
     printf("%i\n", *data);
     return;
+}
+
+enum cmp cmpInt(int* left, int* right) {
+    /*
+     * compare the left and right values and return the result of the
+     * left arg relative to the right arg; left is "less' than right,
+     * left is "equal" to right, or left is "greater" than right
+     */
+    return ( (*left - *right) > 0) - ( (*left - *right) < 0 );
 }
 
 bool matchInt(int *data, int *target) {

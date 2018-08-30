@@ -28,6 +28,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include "compare-enum.c"
 
 void displayFloat(float *data) {
     /*
@@ -40,6 +41,15 @@ void displayFloat(float *data) {
     }
     printf("%f\n", *data);
     return;
+}
+
+enum cmp cmpFloat(float* left, float* right) {
+    /*
+     * compare the left and right values and return the result of the
+     * left arg relative to the right arg; left is "less' than right,
+     * left is "equal" to right, or left is "greater" than right
+     */
+    return ( (*left - *right) > 0) - ( (*left - *right) < 0 );
 }
 
 bool matchFloat(float *data, float *target) {
