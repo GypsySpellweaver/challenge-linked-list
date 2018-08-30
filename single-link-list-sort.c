@@ -44,6 +44,34 @@
  */
 
 
+static LLNode* sortedMerge(LLNode* left_ptr, LLNode* right_ptr, enum cmp (*cmp_func)()) {
+    // empty left, use the right, even if NULL
+    if ( NULL == left_ptr->next ) {
+        return right_ptr->next;
+    }
+    // non-empty left, empty right, left wins
+    else if ( NULL == right_ptr->next ) {
+        return left_ptr->next;
+    }
+    //
+    LLNode* next_node = NULL;
+    if ( greater == (cmp_func)(left_ptr->next->data, right_ptr->next->data) ) {
+        // left is larger, use first one on the right
+        next_node = right_ptr->next;
+        // back again to find the next one
+        next_node->next = sortedMerge(left_ptr, right_ptr->next, cmp_func);
+    }
+    else {
+        // left is not larger, use it
+        next_node = left_ptr->next;
+        // back again to find the next one
+        next_node->next = sortedMerge(left_ptr->next, right_ptr, cmp_func);
+    }
+    // send the final list back up the chain
+    return next_node;
+}
+
+
 void mergeSort(LLNode* head_ptr, enum cmp (*cmp_func)()) {
     /*
      * Main routine for sorting the list.
