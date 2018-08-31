@@ -49,6 +49,47 @@ AMD FX™-8300 Eight-Core Processor
 >     This is free software; see the source for copying conditions. There is NO
 >     warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
+### Valgrind Info (Installed 2016-08-31 03:54:04 UTC)
+
+Current version of Valgrind is [Valgrind 3.13.0][d] - 14 June 2017.
+
+Available from [http://valgrind.org/downloads/current.html][v]
+
+Includes a sepecial warning:
+
+>  Programs running under Valgrind run significantly more slowly, and use much more memory -- e.g. more than twice as much as normal under the Memcheck tool. Therefore, it's best to use Valgrind on the most capable machine you can get your hands on.
+
+    $ valgrind --version
+
+yields
+
+    valgrind-3.13.0
+
+Looks like all is well.
+
+    $ valgrind --leak-check=full ls -l
+
+yields
+
+    ==17534==
+    ==17534== HEAP SUMMARY:
+    ==17534==     in use at exit: 20,507 bytes in 34 blocks
+    ==17534==   total heap usage: 633 allocs, 599 frees, 96,021 bytes allocated
+    ==17534==
+    ==17534== LEAK SUMMARY:
+    ==17534==    definitely lost: 0 bytes in 0 blocks
+    ==17534==    indirectly lost: 0 bytes in 0 blocks
+    ==17534==      possibly lost: 0 bytes in 0 blocks
+    ==17534==    still reachable: 20,507 bytes in 34 blocks
+    ==17534==         suppressed: 0 bytes in 0 blocks
+    ==17534== Reachable blocks (those to which a pointer was found) are not shown.
+    ==17534== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+    ==17534==
+    ==17534== For counts of detected and suppressed errors, rerun with: -v
+    ==17534== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+That looks to me like it's a "done deal" for the install of Valgrind.
+
 ---
 
 ## License and copyright
@@ -60,8 +101,10 @@ Copyright ©2018 Gypsy Spellwaver
 
   [a]: https://cseducators.stackexchange.com/a/5007/104
   [c]: https://cseducators.stackexchange.com
+  [d]: ftp://sourceware.org/pub/valgrind/valgrind-3.13.0.tar.bz2
   [l]: https://en.wikipedia.org/wiki/MIT_License
   [m]: https://opensource.org/licenses/MIT
   [q]: https://cseducators.stackexchange.com/q/5003/104
   [s]: https://stackexchange.com
   [u]: https://cseducators.stackexchange.com/users/21/ncmathsadist
+  [v]: http://valgrind.org/downloads/current.html

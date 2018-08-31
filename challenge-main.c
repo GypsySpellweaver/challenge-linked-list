@@ -53,7 +53,7 @@ int main() {
 //     workOutWithGivenNumbers();
 //     workOutWithRandomNumbers(11100);
     LLNode* random_head_ptr = newListNode(NULL);
-    workOutWithRandomNumbersRemotely(234567, random_head_ptr);
+    workOutWithRandomNumbersRemotely(76800, random_head_ptr);
     workOutWithRandomNumbersRemotelyFinal(random_head_ptr);
     free(random_head_ptr);
     return 0;
