@@ -1,5 +1,13 @@
 # Create a singly-linked list from scratch in C without having memory leaks
 
+---
+
+## Final results
+
+The trials are done, and the results are in. See the [REPORT_VALGRIND.md][r] file for all the details, and my conclusions.
+
+---
+
 ## Background
 
 On the [Computer Science Educators][c] of the [Stack Exchange Network][s] a question was posed: "[Why are pointers a key topic in a CS curriculum and oft cited as something people don't get?][q]". User [ncmathsadist][u] posted an answer indicating the difficulty with pointers in C is the memory management associated with their use rather than their actual usage.
@@ -53,7 +61,8 @@ AMD FX™-8300 Eight-Core Processor
 
 Current version of Valgrind is [Valgrind 3.13.0][d] - 14 June 2017.
 
-Available from [http://valgrind.org/downloads/current.html][v]
+Available from [http://valgrind.org/downloads/current.html][v].
+
 
 Includes a sepecial warning:
 
@@ -105,6 +114,7 @@ Copyright ©2018 Gypsy Spellwaver
   [l]: https://en.wikipedia.org/wiki/MIT_License
   [m]: https://opensource.org/licenses/MIT
   [q]: https://cseducators.stackexchange.com/q/5003/104
+  [r]: https://github.com/GypsySpellweaver/challenge-linked-list/blob/challenge/REPORT_VALGRIND.md
   [s]: https://stackexchange.com
   [u]: https://cseducators.stackexchange.com/users/21/ncmathsadist
   [v]: http://valgrind.org/downloads/current.html
