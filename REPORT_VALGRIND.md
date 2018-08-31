@@ -1,6 +1,6 @@
 # Valgrind results
 
-Setting the count of random numbers at 75k (76,800), compiling and running through Valgrind gave no memory leaks, or other errors. At a time of about 1 minute, I grew encouraged and increased the count to 150k (153,600) and repeated the process. Even that was only a shave above 4 minutes. Running the same, without Valgrind was about a minute and a half, so Valgrind's warning of taking more time is valid. The output of the sorting was redirected to a file in all three cases, so any I/O timing would be reasonably constant between runs. Below is the screen dump for the three runs.
+Setting the count of random numbers at 75k (76,800), compiling and running through Valgrind gave no memory leaks, or other errors. At a time of about 1 minute, I grew encouraged and increased the count to 150k (153,600) and repeated the process. Even that was only a shave above 4 minutes. Running the same, without Valgrind was about a minute and a half, so Valgrind's warning of taking more time is valid. The output of the sorting was redirected to a file in all three cases, so any I/O timing would be reasonably constant between runs. Below is the screen dump for the three runs. The first run's output, [challenge-main.log][l], is included in the repo. The others wouldn't be of any value and would amount to wasted space. (The first one might as well, but including one did seem appropriate.)
 
 
     gypsy@SuSE:/home/projects/challenge-linked-list> gcc -Wall -g challenge-main.c -o challenge-main && time valgrind --leak-check=full --show-leak-kinds=all ./challenge-main > challenge-main.log
@@ -127,8 +127,6 @@ Then, as one final "why not" I ran all the test through Valgrind as well. Just t
 
 # Final thoughts and summary
 
-====
-
 ## Pointers
 
 ### Memory leaks
@@ -141,7 +139,7 @@ While I'm new to C programming, I'm not new to all programming, so my view isn't
 
 ## The C programming language
 
-I like it. Okay, I'll admit; it's not _object-oriented_. I have nothing against OO programming in the least. Likewise, I have nothing against procedural programming, or functional programming. I don't prefer compiled over interpreted (or Java which is neither and both). I don't prefer neither nails, screws, nor Crazy-Glue. I don't think using nails to repair a porcelain tea set is a good idea. Nor is it efficient to use a hammer to fasten sheet-metal with bolts. Sometimes there are several options for getting a task accomplished, and not always is there a clear "best choice." The developer that is competent in more than one language, coding style, framework, or stack, has more tools to choose from, and has a better than average chance of not only having the "right tool for the job" but also knowing why the chosen tool _is_ the right one.
+I like it. Okay, I'll admit; it's not _object-oriented_. I have nothing against OO programming in the least. Likewise, I have nothing against procedural programming, or functional programming. I don't prefer compiled over interpreted (or Java which is neither and both). I prefer neither nails, screws, nor Crazy-Glue. I don't think using nails to repair a porcelain tea set is a good idea. Nor is it efficient to use a hammer to fasten sheet-metal with bolts. Sometimes there are several options for getting a task accomplished, and not always is there a clear "best choice." The developer that is competent in more than one language, coding style, framework, or stack, has more tools to choose from, and has a better than average chance of not only having the "right tool for the job" but also knowing why the chosen tool _is_ the right one.
 
 So... I like C. Not sure when it will happen, but I look forward to learning more about C, and becoming competent enough in C to add it to my own set of tools. Since they are closely related, I presume that C++ will get similar attention from me as C will. Perhaps even simultaneously.
 
@@ -150,5 +148,5 @@ So... I like C. Not sure when it will happen, but I look forward to learning mor
 Using pointers, and recursion, the merge sort becomes almost trivial to implement. At a cost, however. Recusion, even with pointers, is hard on the memeory allocated to the stack. Tail recursion can help with that, of course. Using arrays, even if it's an array of pointers, it's easy to work an interative approach to a merge sort. That's now how I did this one though. Depending on the size of the stack, this program will probably crash sooner than expected. On a GNU/Linux system with a stack space of 8192, I'd predict failure at around 130,000 nodes. Using `ulimit -s 32768` should allow enough room for a rather sizable list.
 
 
-
+  [l]: https://raw.githubusercontent.com/GypsySpellweaver/challenge-linked-list/challenge/challenge-main.log
 
