@@ -97,6 +97,7 @@ void sanityChecksFloat() {
     findNode(head_ptr, NULL, NULL);
     printf("\tChecking findNode(head_ptr, &num1, NULL);\t");
     findNode(head_ptr, &num1, NULL);
+    free(head_ptr);
 }
 
 void sanityChecksInt() {
@@ -162,4 +163,5 @@ void sanityChecksInt() {
     findNode(head_ptr, NULL, NULL);
     printf("\tChecking findNode(head_ptr, &num1, NULL);\t");
     findNode(head_ptr, &num1, NULL);
+    free(head_ptr);
 }

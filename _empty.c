@@ -336,5 +336,7 @@ void workOutWithEmptyList() {
     printf("--------------------- walking\n");
     walkList(head_ptr, displayInt);
     printf("*********************\n\n");
+    clearList(head_ptr, NULL);
+    free(head_ptr);
 }
 
